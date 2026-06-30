@@ -320,21 +320,29 @@ export default function App() {
     setLoading(true); setResult(null); setErr(false);
     const info = [age&&`السن: ${age}`, gender&&`النوع: ${gender}`, chronic&&`أمراض مزمنة: ${chronic}`].filter(Boolean).join(" | ");
     try {
-      const prompt = `${SYSTEM}\n\n${info?"معلومات: "+info+"\n":""}الأعراض: "${symptoms}"`;
       const res = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${import.meta.env.VITE_GEMINI_KEY}`,
+        "https://api.groq.com/openai/v1/chat/completions",
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: { 
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${import.meta.env.VITE_GROQ_KEY}`
+          },
           body: JSON.stringify({
-            contents: [{ parts: [{ text: prompt }] }],
-            generationConfig: { temperature: 0.3, maxOutputTokens: 1000, responseMimeType: "application/json" },
+            model: "llama-3.3-70b-versatile",
+            messages: [
+              { role: "system", content: SYSTEM },
+              { role: "user", content: `${info ? "معلومات: " + info + "\n" : ""}الأعراض: "${symptoms}"` }
+            ],
+            temperature: 0.3,
+            max_tokens: 1000,
+            response_format: { type: "json_object" }
           }),
         }
       );
       const data = await res.json();
-      if (!res.ok) { console.error("Gemini error:", res.status, data); setErr(true); return; }
-      const raw = data.candidates?.[0]?.content?.parts?.[0]?.text || "";
+      if (!res.ok) { console.error("API error:", res.status, data); setErr(true); return; }
+      const raw = data.choices?.[0]?.message?.content || "";
       const cleaned = raw.replace(/```json|```/g, "").trim();
       setResult(JSON.parse(cleaned));
       setTimeout(() => resultRef.current?.scrollIntoView({ behavior:"smooth", block:"start" }), 150);

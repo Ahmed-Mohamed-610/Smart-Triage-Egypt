@@ -1,21 +1,21 @@
 import { useState, useEffect, useRef } from "react";
 
-//    PALETTE — Premium Crimson / Gold / Cream
+// Palette
 const C = {
-  ink:       "#0F0504", // أسود ملكي بلمحة نبيتي غامق
-  deep:      "#1E0A08", // مارون/نبيتي داكن جداً
-  rich:      "#36110B", // نبيتي دافئ للأسطح
-  med:       "#541B12", // بني محمر دافئ
-  warm:      "#732317", // أحمر قرمزي مطفي
-  crimson:   "#8F1818", // اللون الرئيسي للمنصة
-  red:       "#C21818", // أحمر الطوارئ المضيء
-  gold:      "#D4AF37", // ذهبي معدني فخم
-  lightGold: "#E6C663", // ذهبي هادئ للإضاءات
-  pale:      "#F3E5AB", // بيج ذهبي فاتح
-  cream:     "#FDFBF7", // خلفية كريمي ناعمة ومريحة جداً للعين
-  offWhite:  "#F8F5EE", // أبيض عاجي للأسطح الفرعية
-  tan:       "#EADCC9", // حدود ذهبية كريمية مطفية
-  muted:     "#8A756E", // نصوص فرعية رمادية دافئة
+  ink:       "#0F0504",
+  deep:      "#1E0A08",
+  rich:      "#36110B",
+  med:       "#541B12",
+  warm:      "#732317",
+  crimson:   "#8F1818",
+  red:       "#C21818",
+  gold:      "#D4AF37",
+  lightGold: "#E6C663",
+  pale:      "#F3E5AB",
+  cream:     "#FDFBF7",
+  offWhite:  "#F8F5EE",
+  tan:       "#EADCC9",
+  muted:     "#8A756E",
   white:     "#FFFFFF",
 };
 

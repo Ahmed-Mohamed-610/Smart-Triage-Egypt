@@ -1,8 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-/* ═══════════════════════════════════════════
-   PALETTE — Premium Crimson / Gold / Cream
-═══════════════════════════════════════════ */
+//    PALETTE — Premium Crimson / Gold / Cream
 const C = {
   ink:       "#0F0504", // أسود ملكي بلمحة نبيتي غامق
   deep:      "#1E0A08", // مارون/نبيتي داكن جداً
@@ -21,9 +19,7 @@ const C = {
   white:     "#FFFFFF",
 };
 
-/* ═══════════════════════════════════════════
-   TRIAGE CONFIG
-═══════════════════════════════════════════ */
+//    TRIAGE CONFIG
 const TRIAGE = {
   critical: {
     label: "حالة حرجة جداً — طوارئ فورية",
@@ -51,9 +47,7 @@ const TRIAGE = {
   },
 };
 
-/* ═══════════════════════════════════════════
-   SYMPTOMS (Egyptian Colloquial Corpus)
-═══════════════════════════════════════════ */
+//    SYMPTOMS (Egyptian Colloquial Corpus)
 const CHIPS = [
   // أعراض حرجة وطارئة (الجلطات والنوبات)
   { label: "وجع عاصر وتقيل في الصدر",   icon: "", cat: "أعراض جلطة حادة" },
@@ -77,9 +71,7 @@ const SYSTEM = `أنت نظام طبي ذكي للفرز الطبي (Smart Triag
 {"level":"critical|urgent|nonurgent","title":"عنوان قصير","destination":"المكان المحدد","specialty":"التخصص","reason":"شرح 2-3 جمل عامية مصرية تفرق بين الجلطة ودور البرد بدقة","advice":["نصيحة 1","نصيحة 2","نصيحة 3","نصيحة 4"],"warning":"علامة خطر واحدة بالعامية","estimatedWait":"وقت الانتظار المتوقع"}
 معايير صريحة: ظهور أي عرض عصبي أو قلبي مفاجئ (تقل حركة، عوجة وش، وجع صدر عاصر) = critical فوراً لحماية المريض من خطر الجلطة والسكتة. أعراض الرشح والزكام وتكسير الجسم المتناثر = nonurgent.`;
 
-/* ═══════════════════════════════════════════
-   HOOKS & REVEALS
-═══════════════════════════════════════════ */
+//    HOOKS & REVEALS
 function useInView(threshold = 0.1) {
   const ref = useRef(null);
   const [vis, setVis] = useState(false);
@@ -116,9 +108,7 @@ function useCounter(target, active) {
   return val;
 }
 
-/* ═══════════════════════════════════════════
-   ECG LINE
-═══════════════════════════════════════════ */
+//    ECG LINE
 function ECG({ color = C.gold, h = 34, op = .5 }) {
   return (
     <svg viewBox="0 0 1200 40" style={{ width:"100%",height:h,display:"block",opacity:op }} preserveAspectRatio="none">
@@ -131,9 +121,7 @@ function ECG({ color = C.gold, h = 34, op = .5 }) {
   );
 }
 
-/* ═══════════════════════════════════════════
-   STAT COUNTER CARD
-═══════════════════════════════════════════ */
+//    STAT COUNTER CARD
 function Stat({ val, suffix, label, delay }) {
   const [ref, vis] = useInView();
   const num = useCounter(val, vis);
@@ -153,9 +141,7 @@ function Stat({ val, suffix, label, delay }) {
   );
 }
 
-/* ═══════════════════════════════════════════
-   LOADER
-═══════════════════════════════════════════ */
+//    LOADER
 const STEPS = [
   { t:"بنقرأ أعراضك بالعامية...",       i:"" },
   { t:"بنحلل احتمالية وجود جلطة...",   i:"" },
@@ -190,9 +176,7 @@ function Loader() {
   );
 }
 
-/* ═══════════════════════════════════════════
-   RESULT CARD
-═══════════════════════════════════════════ */
+//    RESULT CARD
 function ResultCard({ result, t }) {
   return (
     <div style={{ borderRadius:24,overflow:"hidden",border:`2px solid ${t.border}`,
@@ -280,9 +264,7 @@ function ResultCard({ result, t }) {
   );
 }
 
-/* ═══════════════════════════════════════════
-   MAIN APP
-═══════════════════════════════════════════ */
+//    MAIN APP
 export default function App() {
   const [symptoms,  setSymptoms]  = useState("");
   const [age,       setAge]       = useState("");
@@ -400,7 +382,7 @@ export default function App() {
         }
       `}</style>
 
-      {/* ══════════ NAVBAR ══════════ */}
+      {/* NAVBAR */}
       <nav style={{
         position:"sticky", top:0, zIndex:200,
         background: "rgba(15,5,4,.95)",
@@ -455,7 +437,7 @@ export default function App() {
         </div>
       </nav>
 
-      {/* ══════════ HERO ══════════ */}
+      {/* HERO */}
       <header className="hero-section" style={{
         background:`linear-gradient(155deg, ${C.ink} 0%, ${C.deep} 40%, ${C.rich} 75%, ${C.med} 100%)`,
         position:"relative", overflow:"hidden", minHeight:"88vh",
@@ -573,7 +555,7 @@ export default function App() {
         </div>
       </header>
 
-      {/* ══════════ STATS BAR ══════════ */}
+      {/* STATS BAR */}
       <div id="stats" style={{ background:C.ink, borderBottom:`2px solid ${C.gold}` }}>
         <div className="stats-grid" style={{ maxWidth:1160,margin:"0 auto",padding:"0 32px",
           display:"grid",gridTemplateColumns:"repeat(4,1fr)" }}>
@@ -592,7 +574,7 @@ export default function App() {
 
       <main className="main-content" style={{ maxWidth:1160,margin:"0 auto",padding:"60px 32px 100px" }}>
 
-        {/* ══════════ HOW IT WORKS ══════════ */}
+        {/* HOW IT WORKS */}
         <div id="how">
           <Reveal>
             <div style={{ textAlign:"center",marginBottom:40 }}>
@@ -626,7 +608,7 @@ export default function App() {
           </div>
         </div>
 
-        {/* ══════════ TRIAGE TOOL ══════════ */}
+        {/* TRIAGE TOOL */}
         <div ref={triageCardRef} id="triage-card">
           <Reveal delay={.05}>
             <div style={{
@@ -791,7 +773,7 @@ export default function App() {
           </Reveal>
         </div>
 
-        {/* ══════════ WHY US ══════════ */}
+        {/* WHY US */}
         <Reveal delay={.05}>
           <div style={{ marginTop:72 }}>
             <div style={{ textAlign:"center",marginBottom:40 }}>
@@ -827,7 +809,7 @@ export default function App() {
           </div>
         </Reveal>
 
-        {/* ══════════ DASHBOARD INSIGHTS ══════════ */}
+        {/* DASHBOARD INSIGHTS */}
         <div id="about">
         <Reveal delay={.05}>
           <div style={{
@@ -875,7 +857,7 @@ export default function App() {
 
       </main>
 
-      {/* ══════════ FOOTER ══════════ */}
+      {/* FOOTER */}
       <footer style={{ background:C.ink,borderTop:`2px solid ${C.gold}`,padding:"44px 32px 32px" }}>
         <div style={{ maxWidth:1160,margin:"0 auto" }}>
           <div className="footer-grid" style={{
